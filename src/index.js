@@ -18,10 +18,8 @@ try {
     client.errColor = "#eb4034";
     client.defaultServer = "217055651371679745";
 
-    client.Commands = new Collection();
-    client.CommandList = [];
-
-    client.CommandGuilds = [];
+    client.commands = new Collection();
+    client.commandList = [];
 
     client.buttons = new Collection();
     client.events = new Collection();

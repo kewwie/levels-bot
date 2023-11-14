@@ -5,9 +5,9 @@ module.exports = {
 		.setName("about")
 		.setDescription("Get info about the service"),
 	
-	guilds: [1154327161990295592],
+	guilds: [1154327161990295592], 
 
 	async execute(interaction) {
-		await interaction.reply("Coming Soon\n**[View Website](http://localhost:3000/)**");
+		await interaction.reply("Made by K3wwie");
 	},
 };

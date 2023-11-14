@@ -10,9 +10,10 @@ module.exports = (client) => {
             
         for (const file of commandFiles) {
             const command = require(`../commands/${file}`);
-            client.Commands.set(command.data.name, command);
+            client.commands.set(command.data.name, command);
+            client.commandList.push(command.data.toJSON());
 
-            if (!command.guilds) {
+            /*if (!command.guilds) {
                 client.CommandList.push(command.data.toJSON());
             } else {
                 for (var guild of command.guilds)
@@ -22,22 +23,31 @@ module.exports = (client) => {
                     console.log(client.CommandGuilds.shift())
                     //client.CommandGuilds[guild] = commandGuilds;
                     // Replace object in array 
-            }
+            }*/
+        }
+
+        if (config.status !== "DEV") {
+            new REST({version: '10'}).setToken(config.discord.token)
+                .put(Routes.applicationCommands(config.discord.id), {body: client.CommandList})
+                .then(() => console.log('Successfully registered application commands.'))
+                .catch(console.error);
+        } else {
+            new REST({version: '10'}).setToken(config.discord.token)
+                .put(Routes.applicationGuildCommands(config.discord.id, config.testServer), {body: client.CommandList})
+                .then(() => console.log('Successfully registered test application commands.'))
+                .catch(console.error);
         }
         
-        new REST({version: '10'}).setToken(config.discord.token)
-            .put(Routes.applicationCommands(config.discord.id), {body: client.CommandList})
-            .then(() => console.log('Successfully registered application commands.'))
-            .catch(console.error);
         
-        console.log(client.CommandGuilds)
+        
+       /* console.log(client.CommandGuilds)
         for (var guild of client.CommandGuilds) {
             console.log(111)
             new REST({version: '10'}).setToken(config.discord.token)
                 .put(Routes.applicationGuildCommands(config.discord.id, guild), {body: client.commandList})
                 .then(() => console.log('Successfully registered application commands.'))
                 .catch(console.error);
-        }
+        }*/
 
     } 
 }

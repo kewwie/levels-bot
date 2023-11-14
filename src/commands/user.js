@@ -20,13 +20,60 @@ module.exports = {
 			.setRequired(false)
 	    ),
 
-	async execute(interaction) {
-		var userData = await axios.get([
-			config.url,
-			"/api/guild/217055651371679745/user/",
-			interaction.options.get("user").id
-		].join())
+	async execute(client, interaction) {
+		var user;
 
-		await interaction.reply({content: userData, ephemeral: true})
+		if (!interaction.options.getUser("user")) {
+			user = interaction.user.id;
+		} else {
+			user = interaction.options.getUser("user").id;
+		}
+
+		var { data } = await axios.get(config.url + "/api/guild/217055651371679745/user/" + user)
+
+		console.log(data);
+		if (data) {
+			var tag;
+
+			if (data.discriminator === "0") {
+				tag = data.username;
+			}
+			else {
+				tag = data.username + "#" + data.discriminator;
+			}
+
+			console.log(data.hourlyXp)
+		    var embed = new EmbedBuilder()
+			    .setColor(client.embedColor)
+				.setAuthor({ name: tag, iconURL: data.avatarUrl })
+				.addFields(
+					{ name: "Rank", value: `#${data.rank}`, inline: true },
+					{ name: "Level", value: `${data.level}`, inline: true },
+
+					{ name: "Total XP", value: String(data.totalXp), inline: true },
+
+					/*{ name: "Hourly XP", value: String(data.hourlyXp) },
+					{ name: "Daily XP", value: String(data.dailyXp), inline: true },
+					{ name: "Weekly XP", value: String(data.weeklyXp), inline: true },
+					{ name: "Monthly XP", value: String(data.monthlyXp), inline: true },
+
+					{ name: "Total Msgs", value: String(data.messageCount), inline: true },*/
+
+					/*{ name: "Hourly Msgs", value: String(data.hourlyMsg), inline: true },
+					{ name: "Daily Msgs", value: String(data.dailyMsg), inline: true },
+					{ name: "Weekly Msgs", value: String(data.weeklyMsg), inline: true },
+					{ name: "Monthly Msgs", value: String(data.monthlyMsg), inline: true },*/
+
+					{ name: "XP to Level Up", value: String(data.levelXp - data.userXp), inline: true },
+					{ name: "Messages to Level Up", value: String((data.levelXp - data.userXp) / 20), inline: true },
+
+				)
+				.setTimestamp()
+				.setImage("https://kewwie.com/assets/full_embed.png")
+
+			await interaction.reply({embeds: [embed], ephemeral: false});
+		} else {
+			await interaction.reply({content: "This user doesn't have any stats", ephemeral: true});
+		}
 	},
 };
