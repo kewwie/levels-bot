@@ -19,7 +19,7 @@ module.exports = {
 				.setRequired(true)
 				.addChoices(
 					{ name: 'XP Leaderboard', value: 'xp' },
-					{ name: 'Messages Leaderboard', value: 'message' },
+					{ name: 'Message Leaderboard', value: 'message' },
 				)
 		)
 		.addStringOption(option => 
@@ -43,7 +43,7 @@ module.exports = {
 			config.url +
 			"/api/guild/217055651371679745/leaderboard?" +
 			new URLSearchParams({
-				limit: 100 * 10
+				limit: 10 * 100
 			})
 		);
 
