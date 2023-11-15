@@ -28,14 +28,15 @@ module.exports = (client) => {
 
         if (config.status !== "DEV") {
             new REST({version: '10'}).setToken(config.discord.token)
-                .put(Routes.applicationCommands(config.discord.id), {body: client.CommandList})
+                .put(Routes.applicationCommands(config.discord.id), {body: client.commandList})
                 .then(() => console.log('Successfully registered application commands.'))
                 .catch(console.error);
         } else {
             new REST({version: '10'}).setToken(config.discord.token)
-                .put(Routes.applicationGuildCommands(config.discord.id, config.testServer), {body: client.CommandList})
+                .put(Routes.applicationGuildCommands(config.discord.id, config.testServer), {body: client.commandList})
                 .then(() => console.log('Successfully registered test application commands.'))
                 .catch(console.error);
+            console.log(config.testServer, config.discord.id, config.discord.token)
         }
         
         

@@ -42,13 +42,15 @@ module.exports = {
 				tag = data.username + "#" + data.discriminator;
 			}
 
-			console.log(data.hourlyXp)
 		    var embed = new EmbedBuilder()
 			    .setColor(client.embedColor)
 				.setAuthor({ name: tag, iconURL: data.avatarUrl })
 				.addFields(
 					{ name: "Rank", value: `#${data.rank}`, inline: true },
 					{ name: "Level", value: `${data.level}`, inline: true },
+					{ name: "Average XP", value: `104`, inline: true },
+
+					//{ name: '\u200B', value: '\u200B' },
 
 					/*{ name: "Total XP", value: String(data.totalXp), inline: true },
 
@@ -64,15 +66,14 @@ module.exports = {
 					{ name: "Weekly Msgs", value: String(data.weeklyMsg), inline: true },
 					{ name: "Monthly Msgs", value: String(data.monthlyMsg), inline: true },*/
 
-					{ name: "Total", value: `${data.totalXp} Xp \n ${data.messageCount} Msgs`, inline: true },
+					{ name: "Total", value: `${data.totalXp} Xp \n${data.messageCount} Msgs`, inline: true },
 
-					{ name: "Hourly", value: `${data.hourlyXp} Xp \n ${data.hourlyMsg} Msgs`, inline: true },
-					{ name: "Daily", value: `${data.dailyXp} Xp \n ${data.dailyMsg} Msgs`, inline: true },
-					{ name: "Weekly", value: `${data.weeklyXp} Xp \n ${data.weeklyMsg} Msgs`, inline: true },
-					{ name: "Monthly", value: `${data.monthlyXp} Xp \n ${data.monthlyMsg} Msgs`, inline: true },
+					{ name: "Hourly", value: `${data.hourlyXp} Xp \n${data.hourlyMsg} Msgs`, inline: true },
+					{ name: "Daily", value: `${data.dailyXp} Xp \n${data.dailyMsg} Msgs`, inline: true },
+					{ name: "Weekly", value: `${data.weeklyXp} Xp \n${data.weeklyMsg} Msgs`, inline: true },
+					{ name: "Monthly", value: `${data.monthlyXp} Xp \n${data.monthlyMsg} Msgs`, inline: true },
 
-					{ name: "XP to Level Up", value: String(data.levelXp - data.userXp), inline: true },
-					{ name: "Messages to Level Up", value: String((data.levelXp - data.userXp) / 20), inline: true },
+					{ name: "To Level Up", value: `${data.levelXp - data.userXp} Xp \n${(data.levelXp - data.userXp) / 20} Msgs`, inline: true },
 
 				)
 				.setTimestamp()
