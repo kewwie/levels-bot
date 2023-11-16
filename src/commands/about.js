@@ -1,4 +1,12 @@
-const { SlashCommandBuilder, ActionRowBuilder, SelectMenuBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { 
+	SlashCommandBuilder,
+	ActionRowBuilder,
+	SelectMenuBuilder,
+	ButtonBuilder,
+	ButtonStyle,
+	EmbedBuilder
+} = require('discord.js');
+const config = require("../config")();
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -7,7 +15,26 @@ module.exports = {
 	
 	guilds: [1154327161990295592], 
 
-	async execute(interaction) {
-		await interaction.reply("Made by K3wwie");
+	async execute(client, interaction) {
+		const embed = new EmbedBuilder()
+			.setColor(client.embedColor)
+			.setTitle(`About ${client.user.username}`)
+			.addFields(
+				{ name: "Developer", value: "<@292948682884775937>", inline: true },
+				{ name: "Discord Latency", value: `${Math.round(client.ws.ping)}ms`, inline: true },
+			)
+			.setTimestamp();
+	
+		const button = new ActionRowBuilder().addComponents(
+			new ButtonBuilder()
+			.setLabel("Support Server")
+			.setStyle(ButtonStyle.Link)
+			.setURL("https://kewwie.com/"),
+		);
+	
+		await interaction.reply({
+			embeds: [embed],
+			components: [button],
+		});
 	},
 };

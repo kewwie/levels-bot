@@ -18,14 +18,15 @@ module.exports = {
             }
 
         } else if (interaction.isButton()) {
-            const button = interaction.client.buttons.get(interaction.customId);
+            return;
+            /*const button = interaction.client.buttons.get(interaction.customId);
             if (!button) return console.error(`There is no code for this button\n${interaction.customId}`);
 
             try {
                 await button.execute(client, interaction);
             } catch (err) {
                 console.log(err);
-            }
+            }*/
         } else if (interaction.isSelectMenu()) {
             return;
             const SelectMenuPath = path.join(__dirname, 'components/SelectMenu');

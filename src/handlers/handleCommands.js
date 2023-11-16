@@ -36,7 +36,6 @@ module.exports = (client) => {
                 .put(Routes.applicationGuildCommands(config.discord.id, config.testServer), {body: client.commandList})
                 .then(() => console.log('Successfully registered test application commands.'))
                 .catch(console.error);
-            console.log(config.testServer, config.discord.id, config.discord.token)
         }
         
         
