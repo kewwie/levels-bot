@@ -9,6 +9,7 @@ const {
 const axios = require("axios");
 
 const config = require("../config")();
+const styleNumber = require("../styleNumber");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -31,7 +32,6 @@ module.exports = {
 
 		var { data } = await axios.get(config.url + "/api/guild/217055651371679745/user/" + user)
 
-		console.log(data);
 		if (data) {
 			var tag;
 
@@ -48,7 +48,7 @@ module.exports = {
 				.addFields(
 					{ name: "Rank", value: `#${data.rank}`, inline: true },
 					{ name: "Level", value: `${data.level}`, inline: true },
-					{ name: "Average XP", value: `104`, inline: true },
+					{ name: "Average XP", value: `${styleNumber((data.averageXp || 20))}`, inline: true },
 
 					//{ name: '\u200B', value: '\u200B' },
 
@@ -66,18 +66,19 @@ module.exports = {
 					{ name: "Weekly Msgs", value: String(data.weeklyMsg), inline: true },
 					{ name: "Monthly Msgs", value: String(data.monthlyMsg), inline: true },*/
 
-					{ name: "Total", value: `${data.totalXp} Xp \n${data.messageCount} Msgs`, inline: true },
+					{ name: "Total", value: `${styleNumber(data.totalXp)} Xp \n${styleNumber(data.messageCount)} Msgs`, inline: true },
 
-					{ name: "Hourly", value: `${data.hourlyXp} Xp \n${data.hourlyMsg} Msgs`, inline: true },
-					{ name: "Daily", value: `${data.dailyXp} Xp \n${data.dailyMsg} Msgs`, inline: true },
-					{ name: "Weekly", value: `${data.weeklyXp} Xp \n${data.weeklyMsg} Msgs`, inline: true },
-					{ name: "Monthly", value: `${data.monthlyXp} Xp \n${data.monthlyMsg} Msgs`, inline: true },
+					{ name: "Hourly", value: `${styleNumber(data.hourlyXp)} Xp \n${styleNumber(data.hourlyMsg)} Msgs`, inline: true },
+					{ name: "Daily", value: `${styleNumber(data.dailyXp)} Xp \n${styleNumber(data.dailyMsg)} Msgs`, inline: true },
+					{ name: "Weekly", value: `${styleNumber(data.weeklyXp)} Xp \n${styleNumber(data.weeklyMsg)} Msgs`, inline: true },
+					{ name: "Monthly", value: `${styleNumber(data.monthlyXp)} Xp \n${styleNumber(data.monthlyMsg)} Msgs`, inline: true },
 
-					{ name: "To Level Up", value: `${data.levelXp - data.userXp} Xp \n${(data.levelXp - data.userXp) / 20} Msgs`, inline: true },
-
+					{ name: "To Level Up", value: `${styleNumber((data.levelXp - data.userXp))} Xp \n${styleNumber(((data.levelXp - data.userXp) / (data.averageXp || 20)))} Msgs`, inline: true },
 				)
 				.setTimestamp()
 				.setImage("https://kewwie.com/assets/full_embed.png")
+
+				console.log(data.averageXp)
 
 			await interaction.reply({embeds: [embed], ephemeral: false});
 		} else {

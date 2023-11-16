@@ -29,7 +29,7 @@ module.exports = {
 			new ButtonBuilder()
 			.setLabel("Support Server")
 			.setStyle(ButtonStyle.Link)
-			.setURL("https://kewwie.com/"),
+			.setURL("https://discord.gg/xyjubXnX9T"),
 		);
 	
 		await interaction.reply({
