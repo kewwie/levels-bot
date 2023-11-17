@@ -1,5 +1,3 @@
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord.js');
 const { readdirSync } = require("node:fs");
 
 const config = require("../config")();
@@ -26,7 +24,7 @@ module.exports = (client) => {
             }*/
         }
 
-        if (config.status !== "DEV") {
+        /*if (config.status !== "DEV") {
             new REST({version: '10'}).setToken(config.discord.token)
                 .put(Routes.applicationCommands(config.discord.id), {body: client.commandList})
                 .then(() => console.log('Successfully registered application commands.'))
@@ -36,7 +34,7 @@ module.exports = (client) => {
                 .put(Routes.applicationGuildCommands(config.discord.id, config.testServer), {body: client.commandList})
                 .then(() => console.log('Successfully registered test application commands.'))
                 .catch(console.error);
-        }
+        }*/
         
         
         
