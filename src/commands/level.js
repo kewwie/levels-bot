@@ -66,7 +66,7 @@ module.exports = {
             .addFields(
                 { name: "Level", value: `${wantedLevel}`, inline: false },
                 { name: "Xp to Level " + wantedLevel, value: `${styleNumber(totalXpNeeded - data.totalXp)}`, inline: false },
-                { name: "Messages to Level " + wantedLevel, value: `${styleNumber((totalXpNeeded - data.totalXp) / data.averageXp)}`, inline: false },
+                { name: "Messages to Level " + wantedLevel, value: `${styleNumber((totalXpNeeded - data.totalXp) / data.averageXp)} (${styleNumber((totalXpNeeded - data.totalXp) / data.averageXp)} Minutes)`, inline: false },
             )
             .setTimestamp()
 
