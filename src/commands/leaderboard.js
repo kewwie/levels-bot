@@ -130,11 +130,8 @@ module.exports = {
 
             const embed = new EmbedBuilder({fields: fields});
 
-            var longerEmbed = "                    \u200B";
-
             embed.setColor(client.embedColor)
-            embed.setTitle(`${getDisplay(leaderboard)} ${getDisplay(type, true)} Leaderboard ${longerEmbed}`);
-            //embed.setImage("https://kewwie.com/assets/full_embed.png")
+            embed.setTitle(`Highest ${getDisplay(type, true)} ${getDisplay(leaderboard)} Leaderboard`);
 
             embeds.push(embed);
         }

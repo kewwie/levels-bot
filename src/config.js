@@ -34,5 +34,6 @@ module.exports = () => {
         api_key: process.env.API_KEY,
         status: process.env.STATUS,
         testServer: process.env.TEST_SERVER,
+        embedLength: "               \u200B",
     })
 }
