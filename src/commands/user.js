@@ -83,8 +83,6 @@ module.exports = {
 				.setTimestamp()
 				.setImage("https://kewwie.com/assets/full_embed.png")
 
-				console.log(data.averageXp)
-
 			await interaction.reply({embeds: [embed], ephemeral: false});
 		} else {
 			await interaction.reply({content: "This user doesn't have any stats", ephemeral: true});
