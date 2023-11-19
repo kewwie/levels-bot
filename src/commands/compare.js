@@ -32,7 +32,7 @@ module.exports = {
 	async execute(client, interaction) {
 		var guildId = await getServer(interaction);
 
-		var user1, user2, idk = [];
+		var user1, user2;
 
 		if (!interaction.options.getUser("user1")) {
 			user1 = interaction.user.id;
@@ -64,7 +64,7 @@ module.exports = {
 				`**Rank:** ${user.rank}`,
 				`**Level:** ${user.level}`,
 				`**Total Xp:** ${styleNumber(user.totalXp)}`,
-				`**Average Xp:** ${styleNumber((user.averageXp || 20))}`,
+				`**Average Xp:** ${styleNumber((user.averageXp || 0))}`,
 				`**Hourly Xp:** ${styleNumber(user.hourlyXp)}`,
 				`**Daily Xp:** ${styleNumber(user.dailyXp)}`,
 				`**Weekly Xp:** ${styleNumber(user.weeklyXp)}`,
@@ -87,8 +87,6 @@ module.exports = {
 			{ name: '\u200B', value: '\u200B', inline: true },
 			{ name: `**${userData2.tag}**`, value: getUserDisplayStats(userData2), inline: true },
 		);
-
-		//embed.setImage("https://kewwie.com/assets/full_embed.png")
 
 		interaction.reply({embeds: [embed]});
 	}
