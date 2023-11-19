@@ -9,6 +9,7 @@ const {
 const axios = require("axios");
 
 const config = require("../config")();
+const getServer = require("../getServer");
 const styleNumber = require("../styleNumber");
 
 module.exports = {
@@ -24,6 +25,8 @@ module.exports = {
 	options: ["server"],
 
 	async execute(client, interaction) {
+		var guildId = await getServer(interaction);
+
 		var user;
 
 		if (!interaction.options.getUser("user")) {
@@ -32,7 +35,7 @@ module.exports = {
 			user = interaction.options.getUser("user").id;
 		}
 
-		var { data } = await axios.get(config.url + "/api/guild/217055651371679745/user/" + user)
+		var { data } = await axios.get(config.url + `/api/guild/${guildId}/user/` + user)
 
 		if (data) {
 			var tag;

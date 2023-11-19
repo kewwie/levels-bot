@@ -9,6 +9,7 @@ const {
 const axios = require("axios");
 
 const config = require("../config")();
+const getServer = require("../getServer");
 const styleNumber = require("../styleNumber");
 
 module.exports = {
@@ -25,10 +26,12 @@ module.exports = {
 			.setDescription("Select the 2nd user")
 			.setRequired(true)
 	    ),
-		
+
 	options: ["server"],
 
 	async execute(client, interaction) {
+		var guildId = await getServer(interaction);
+
 		var user1, user2, idk = [];
 
 		if (!interaction.options.getUser("user1")) {
@@ -48,8 +51,8 @@ module.exports = {
 			return;
 		}
 
-		var userData1 = (await axios.get(config.url + "/api/guild/217055651371679745/user/" + user1)).data;
-		var userData2 = (await axios.get(config.url + "/api/guild/217055651371679745/user/" + user2)).data;
+		var userData1 = (await axios.get(config.url + `/api/guild/${guildId}/user/` + user1)).data;
+		var userData2 = (await axios.get(config.url + `/api/guild/${guildId}/user/` + user2)).data;
 
 		if (!userData1 && !userData2) {
 			await interaction.reply({content: "One or both of the users doesn't have any stats", ephemeral: true});

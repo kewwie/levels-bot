@@ -10,6 +10,7 @@ const { Pagination } = require('pagination.djs');
 const axios = require("axios");
 
 const config = require("../config")();
+const getServer = require("../getServer");
 const styleNumber = require("../styleNumber");
 
 module.exports = {
@@ -41,10 +42,11 @@ module.exports = {
     options: ["server"],
 
 	async execute(client, interaction) {
+        var guildId = await getServer(interaction);
 
         var { data } = await axios.get(
             config.url +
-            "/api/guild/217055651371679745/leaderboard?" +
+            `/api/guild/${guildId}/leaderboard?` +
             new URLSearchParams({
                 limit: 10 * 100
             })
