@@ -20,6 +20,8 @@ module.exports = {
 			.setDescription("Select the user you want to view")
 			.setRequired(false)
 	    ),
+	
+	options: ["server"],
 
 	async execute(client, interaction) {
 		var user;

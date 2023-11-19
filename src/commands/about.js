@@ -13,7 +13,7 @@ module.exports = {
 		.setName("about")
 		.setDescription("Get info about the service"),
 	
-	guilds: [1154327161990295592], 
+	global: true, 
 
 	async execute(client, interaction) {
 		const embed = new EmbedBuilder()

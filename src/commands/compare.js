@@ -25,6 +25,8 @@ module.exports = {
 			.setDescription("Select the 2nd user")
 			.setRequired(true)
 	    ),
+		
+	options: ["server"],
 
 	async execute(client, interaction) {
 		var user1, user2, idk = [];

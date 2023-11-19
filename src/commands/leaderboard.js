@@ -10,7 +10,6 @@ const { Pagination } = require('pagination.djs');
 const axios = require("axios");
 
 const config = require("../config")();
-
 const styleNumber = require("../styleNumber");
 
 module.exports = {
@@ -38,6 +37,8 @@ module.exports = {
 					{ name: 'All-Time', value: 'all-time' },
 				)
 		),
+    
+    options: ["server"],
 
 	async execute(client, interaction) {
 
