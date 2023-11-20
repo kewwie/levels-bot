@@ -27,7 +27,7 @@ module.exports = {
 			.setRequired(true)
 	    ),
 
-	options: ["server"],
+	options: ["server", "serverOptions"],
 
 	async execute(client, interaction) {
 		var guildId = await getServer(interaction);
@@ -64,7 +64,7 @@ module.exports = {
 				`**Rank:** ${user.rank}`,
 				`**Level:** ${user.level}`,
 				`**Total Xp:** ${styleNumber(user.totalXp)}`,
-				`**Average Xp:** ${styleNumber((user.averageXp || 0))}`,
+				`**Average Xp:** ${styleNumber((user.averageXp || 20), 2)}`,
 				`**Hourly Xp:** ${styleNumber(user.hourlyXp)}`,
 				`**Daily Xp:** ${styleNumber(user.dailyXp)}`,
 				`**Weekly Xp:** ${styleNumber(user.weeklyXp)}`,

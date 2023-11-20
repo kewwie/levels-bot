@@ -1,4 +1,5 @@
 const registerCommands = require("../registerCommands");
+const config = require("../config")();
 
 module.exports = {
 	name: 'ready',

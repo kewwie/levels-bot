@@ -27,7 +27,7 @@ module.exports = {
 			.setRequired(false)
 	    ),
 	
-	options: ["server"],
+	options: ["server", "serverOptions"],
 
 	async execute(client, interaction) {
 		var guildId = await getServer(interaction);
@@ -56,9 +56,7 @@ module.exports = {
 
         var totalXpNeeded = (await axios.get(
             config.url + `/api/level?` + new URLSearchParams({ level: Number(wantedLevel) })
-        )).data.totalXp;
-
-        
+        )).data.totalXp; 
 
         var embed = new EmbedBuilder()
             .setColor(client.embedColor)

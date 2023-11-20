@@ -39,7 +39,7 @@ module.exports = {
 				)
 		),
     
-    options: ["server"],
+    options: ["server", "serverOptions"],
 
 	async execute(client, interaction) {
         var guildId = await getServer(interaction);

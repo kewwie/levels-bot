@@ -22,7 +22,7 @@ module.exports = {
 			.setRequired(false)
 	    ),
 	
-	options: ["server"],
+	options: ["server", "serverOptions"],
 
 	async execute(client, interaction) {
 		var guildId = await getServer(interaction);
@@ -53,7 +53,7 @@ module.exports = {
 				.addFields(
 					{ name: "Rank", value: `#${data.rank}`, inline: true },
 					{ name: "Level", value: `${data.level}`, inline: true },
-					{ name: "Average XP", value: `${styleNumber((data.averageXp || 0))}`, inline: true },
+					{ name: "Average XP", value: `${styleNumber((data.averageXp || 20), 2)}`, inline: true },
 
 					//{ name: '\u200B', value: '\u200B' },
 
